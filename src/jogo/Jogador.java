@@ -1,36 +1,33 @@
 package src.jogo;
 
-import java.awt.Point;
-import java.util.Vector;
+import java.awt.event.KeyEvent;
 
-import jplay.GameObject;
 import jplay.Keyboard;
-import jplay.Scene;
-import jplay.Sprite;
-import jplay.TileInfo;
 import jplay.URL;
 import jplay.Window;
-
-public class Jogador extends Sprite{
+import jplay.Scene;
+public class Jogador extends Ator  {
 	//ATRIBUTOS==========================================
 	
-	protected int direcao = 3;
-	
-	private double vel = 0.5;
-	private boolean movendo = false;
 	
 	static double energia = 100;
 	
 	//construtor=========================================
 	public Jogador(int x, int y) {
-		super(URL.sprite("jogador.png"), 20);
+		super(URL.sprite("jogador.png"),20);
 		this.x = x;
 		this.y = y;
 		this.setTotalDuration(2000);
 	}
+	ControleTiros tiros = new ControleTiros();
 	///MEDOTOS===========================================
+	public void atirar(Window janela, Scene cena, Keyboard teclado){
+		if(teclado.keyDown(KeyEvent.VK_A)){
+			tiros.addTiro(x + 12, y + 12, direcao, cena);
+		}
+		tiros.run();
+	}
 	
-	//pode ser chamado das classes cenerios
 	public void controle(Window janela, Keyboard teclado) {
 	
 		if(teclado.keyDown(Keyboard.LEFT_KEY)) {
@@ -43,7 +40,7 @@ public class Jogador extends Sprite{
 			
 			
 		}else if(teclado.keyDown(Keyboard.RIGHT_KEY)){
-			if(this.x < janela.getWidth() - 60) 
+			if(this.x < janela.getWidth() - 40) 
 				this.x += vel;
 			if(this.direcao != 2) {
 				setSequence(8, 12);
@@ -59,7 +56,7 @@ public class Jogador extends Sprite{
 			}movendo = true;
 			
 		}else if(teclado.keyDown(Keyboard.DOWN_KEY)) {
-			if(this.y < janela.getHeight() - 60)
+			if(this.y < janela.getHeight() - 50)
 				this.y += vel;
 			if(this.direcao != 5) {
 				setSequence(0,4);
@@ -74,67 +71,6 @@ public class Jogador extends Sprite{
 		}
 		
 	}
-	
-	Controle controle = new Controle();
-	
-	/**
-	 * Controle dos caminhos que o personagem não pode passar
-	 * @param cena
-	 */
 
-	public void caminho(Scene cena) {
-		Point min = new Point((int)this.x, (int)this.y); 
-		Point max = new Point((int)this.x + this.width, (int)this.y + this.height); 
-
-		Vector<?>tiles = cena.getTilesFromRect(min, max);
-		for(int i = 0; i < tiles.size(); i++) {
-			TileInfo tile = (TileInfo) tiles.elementAt(i);
-			
-			if(colisaoVertical(this, tile)) {
-				if(controle.colisao(this, tile) == true) {
-					
-					if(tile.y + tile.height - 2  < this.y) { //de baixo para cima
-						this.y = tile.y + this.height;
-					}
-					
-					else if(tile.y > this.y + this.height - 2) { //de cima para baixo
-						this.y  = tile.y - this.height;
-					}
-				}
-				
-				if(colisaoHorizontal(this, tile) == true) {
-					if(tile.x > this.x + this.width - 2) {
-						this.x = this.x - tile.width;
-					}else {
-						this.x = this.x + tile.width; 
-					}
-				}
-			}
-		}
-	}
-	
-	private boolean colisaoVertical(GameObject obj, GameObject obj2) {
-		if(obj2.x + obj2.width <= obj.x) {
-			return false;
-		}
-		
-		if(obj.x + obj.width <= obj2.x) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	private boolean colisaoHorizontal(GameObject obj, GameObject obj2) {
-		if(obj2.y + obj2.height <= obj.y) {
-			return false;
-		}
-		
-		if(obj.y + obj.height <= obj2.x) {
-			return false;
-		}
-		
-		return true;
-	}
 	
 }

@@ -2,6 +2,10 @@ package src.jogo;
 
 import jplay.Sprite;
 import jplay.URL;
+import jplay.Window;
+import java.awt.Color;
+import java.awt.Font;
+
 public class Tiro extends Sprite{
 	
 	public static final int LEFT= 1, RIGHT= 2, STOP = 3, UP = 4, DOWN =5;
@@ -9,6 +13,7 @@ public class Tiro extends Sprite{
 	protected int caminho = STOP;
 	protected boolean movendo = false;
 	protected int direcao = 3;
+	protected int ponto = 0;  
 	
 	public Tiro(double x, double y, int caminho) {
 		super(URL.sprite("tiro2.png"), 7);
@@ -50,4 +55,5 @@ public class Tiro extends Sprite{
 			movendo = false;
 		}
 	} 
+	
 }

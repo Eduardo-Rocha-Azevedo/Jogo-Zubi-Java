@@ -15,6 +15,7 @@ public class Ator extends Sprite{
 	protected int direcao = 3;
 	double vel = 0.3;
 	boolean movendo = false;
+	public double energia = 1000;
 	
 	
 	public Ator(String fileName, int numFrames) {

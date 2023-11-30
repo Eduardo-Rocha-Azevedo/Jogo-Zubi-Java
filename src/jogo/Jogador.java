@@ -1,5 +1,7 @@
 package src.jogo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import jplay.Keyboard;
@@ -10,7 +12,8 @@ public class Jogador extends Ator  {
 	//ATRIBUTOS==========================================
 	
 	
-	static double energia = 100;
+	static int energia = 1000;
+	static int pontos = 0;
 	
 	//construtor=========================================
 	public Jogador(int x, int y) {
@@ -21,12 +24,15 @@ public class Jogador extends Ator  {
 	}
 	ControleTiros tiros = new ControleTiros();
 	///MEDOTOS===========================================
-	public void atirar(Window janela, Scene cena, Keyboard teclado){
+	public void atirar(Window janela, Scene cena, Keyboard teclado, Ator inimigo){
 		if(teclado.keyDown(KeyEvent.VK_A)){
 			tiros.addTiro(x + 12, y + 12, direcao, cena);
+			
 		}
-		tiros.run();
+		tiros.run(inimigo);
 	}
+
+	
 	
 	public void controle(Window janela, Keyboard teclado) {
 	
@@ -72,5 +78,17 @@ public class Jogador extends Ator  {
 		
 	}
 
+	Font f = new Font("arial", Font.BOLD, 30);
 	
+	public void energia(Window janela) {
+		janela.drawText("Vida: " + Jogador.energia, 30, 30, Color.GREEN,f);
+	}
+
+	public void pontos(Window janela) {
+        
+		
+        Font f = new Font("arial", Font.BOLD, 30);
+        janela.drawText("Pontos: " + Jogador.pontos,30, 60, Color.GREEN,f);
+    }
 }
+

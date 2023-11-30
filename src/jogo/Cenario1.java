@@ -1,5 +1,7 @@
 package src.jogo;
 
+
+
 import jplay.Keyboard;
 import jplay.Scene;
 import jplay.URL;
@@ -10,43 +12,54 @@ public class Cenario1 extends Cenario{
 	private Scene cena;
 	private Jogador jogador;
 	private Keyboard teclado;
-	private Zumbi zumbi; 
-	
+	private Zumbi zumbi[]; 
+	public static String GameState;
+	private Cenario cenario;
+
 	public Cenario1(Window window) {
 		janela = window;
 		cena = new Scene();
 		cena.loadFromFile(URL.scenario("Cenario1.scn"));
-		jogador = new Jogador(640, 350);
+		jogador = new Jogador(140,350);
 		teclado = janela.getKeyboard();
-		zumbi = new Zumbi(300,300);
+		zumbi = new Zumbi[20];
 		
-		Som.play("musica.wav");
+		Som.play("BeepBox-Song_1.wav");
 
 		run();
 	}
 	
 	private void run() {
+		for(int i= 0; i < zumbi.length; i++) {
+			zumbi[i] = new Zumbi(100*i,100*i);
+		}
+		
 		while(true) {
-			//cena.draw();
+		
 			jogador.controle(janela, teclado);
 			jogador.caminho(cena);
-			jogador.atirar(janela, cena, teclado);
-
-			zumbi.caminho(cena);
-			zumbi.perseguir(jogador.x, jogador.y);
 			//simula a camera que segue o player
 			cena.moveScene(jogador);
+						
+			for(int i = 0; i < zumbi.length; i++) {
+				zumbi[i].caminho(cena);
+				zumbi[i].perseguir(jogador.x, jogador.y);
+				zumbi[i].x += cena.getXOffset();//retorna o quanto o cenario se moveu
+				zumbi[i].y += cena.getYOffset();
+				zumbi[i].draw();
+				jogador.atirar(janela, cena, teclado, zumbi[i]);
+				zumbi[i].morrer();
+				zumbi[i].atacar(jogador,janela);	
+			}
 			
-			zumbi.x += cena.getXOffset();//retorna o quanto o cenario se moveu
-			zumbi.y += cena.getYOffset();
 			
-			
-			
+			jogador.energia(janela);
+			//escreve na tela a quantidade de pontos
+		
+			jogador.pontos(janela);
 			jogador.draw();
-			zumbi.draw();
 			janela.update();
 			mudarCenario();
-						
 		}
 	}
 	

@@ -9,7 +9,7 @@ O desafio enfrentato foi a simplicidade de uso visto que este programa atente fa
 Visualização do programa:</p>
 <p>Ainda em desenvolvimento, em breve a disponibilidade de instalar</p>
 
-<div align="center" display="inline">
+<div align="center" display="inline-flex">
 <img src="https://github.com/Eduardo-Rocha-Azevedo/Jogo-Zubi-Java/assets/142415927/0b4f64df-c854-4137-b4d6-421105588b1f" width="600px">
 
 <img src="https://github.com/Eduardo-Rocha-Azevedo/Jogo-Zubi-Java/assets/142415927/f566ebdc-2b4a-4899-8ca5-ee01fc1476aa" width="600px">

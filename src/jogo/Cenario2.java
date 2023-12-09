@@ -1,8 +1,8 @@
 package src.jogo;
 
+import jplay.URL;
 import jplay.Keyboard;
 import jplay.Scene;
-import jplay.URL;
 import jplay.Window;
 
 public class Cenario2 extends Cenario{

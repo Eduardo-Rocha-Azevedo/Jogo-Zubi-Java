@@ -25,7 +25,7 @@ public class Jogador extends Ator  {
 	ControleTiros tiros = new ControleTiros();
 	///MEDOTOS===========================================
 	public void atirar(Window janela, Scene cena, Keyboard teclado, Ator inimigo){
-		if(teclado.keyDown(KeyEvent.VK_A)){
+		if(teclado.keyDown(KeyEvent.VK_SPACE)){
 			tiros.addTiro(x + 12, y + 12, direcao, cena);
 			
 		}
@@ -69,6 +69,9 @@ public class Jogador extends Ator  {
 				direcao = 5;
 			}movendo = true;
 			
+		}
+		else if(teclado.keyDown(Keyboard.ESCAPE_KEY)) {
+			System.exit(0);
 		}
 
 		if(movendo){

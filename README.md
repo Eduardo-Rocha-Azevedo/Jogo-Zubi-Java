@@ -1,6 +1,6 @@
 <h1>Jogo Zumbi </h1>
 <h2>Motivo do desenvolvimento</h2>
-<p>Este projeto foi idealizado para entretenimento sem o uso de internet, pensando nisso foi criado o Jogo de Corrida para que pessoas de todas idades possam utilizar este programa.
+<p>Este projeto foi idealizado para entretenimento sem o uso de internet, pensando nisso foi criado o Jogo de Zumbi para que pessoas de todas idades possam utilizar este programa.
 
 Para o desenvolvimento foi utilizado a linguagem Java.
 
